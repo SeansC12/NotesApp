@@ -7,6 +7,13 @@
 
 import UIKit
 
+class NoteTableViewCell: UITableViewCell {
+    @IBOutlet weak var noteSubjectLabel: UILabel!
+    @IBOutlet weak var noteContentLabel: UILabel!
+    @IBOutlet weak var noteDateLabel: UILabel!
+    
+}
+
 class NotesTableViewController: UITableViewController {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -100,15 +107,13 @@ class NotesTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteTableViewCell
         
         // Configure the cell...
-        var content = cell.defaultContentConfiguration()
         let selectedIndexOfArray = delegate.arrayOfNotes[indexPath.row]
-        content.text = selectedIndexOfArray.noteSubject
-        content.secondaryText = "Created on: \(selectedIndexOfArray.noteCreationDate)"
-        
-        cell.contentConfiguration = content
+        cell.noteSubjectLabel.text = selectedIndexOfArray.noteSubject
+        cell.noteContentLabel.text = selectedIndexOfArray.noteContent
+        cell.noteDateLabel.text = "Last Modified on: \(selectedIndexOfArray.noteModifiedDate)"
         
         return cell
     }
