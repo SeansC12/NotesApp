@@ -13,6 +13,10 @@ class NoteDetailViewController: UIViewController {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var indexNumber: Int = 0
     var isFromAddButton: Bool = true
+    private var _isInEditingMode = false
+    private var _isFromEditingModeToViewingMode = false
+    private var _isFirstTimeViewing = false
+    private var _noteSubjectInput = ""
     
     
     @IBOutlet weak var subjectTextView: UITextView!
@@ -21,23 +25,33 @@ class NoteDetailViewController: UIViewController {
     @IBOutlet weak var modifiedDateLabel: UILabel!
     
     @IBAction func newNoteBackButton(_ sender: Any) {
-        let leaveButtonAlert = UIAlertController(title: "Are you sure you want to leave?",
-                                                 message: nil,
-                                                 preferredStyle: .alert)
-        leaveButtonAlert.addAction(UIAlertAction(title: "Continue",
-                                                 style: .destructive,
-                                                 handler: {
-            (_) in
+        if _isInEditingMode {
+            let leaveButtonWithoutSavingAlert = UIAlertController(
+                title: "Are you sure you want to leave?",
+                message: "Changes will not be saved",
+                preferredStyle: .alert)
+            
+            leaveButtonWithoutSavingAlert.addAction(UIAlertAction(
+                title: "Continue",
+                style: .destructive,
+                handler: {
+                    (_) in
+                    self.performSegue(withIdentifier: "GoBack", sender: self)
+                }))
+            
+            leaveButtonWithoutSavingAlert.addAction(UIAlertAction(title: "Cancel",
+                                                                  style: .cancel,
+                                                                  handler: {
+                (_) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(leaveButtonWithoutSavingAlert, animated: true, completion: nil)
+        }
+        if !_isInEditingMode {
             self.addDataToArray()
             self.performSegue(withIdentifier: "GoBack", sender: self)
-        }))
-        leaveButtonAlert.addAction(UIAlertAction(title: "Cancel",
-                                                 style: .cancel,
-                                                 handler: {
-            (_) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(leaveButtonAlert, animated: true, completion: nil)
+        }
+        
     }
     
     
@@ -46,87 +60,78 @@ class NoteDetailViewController: UIViewController {
         contentTextView.isEditable = false
         subjectTextView.textColor = UIColor.black
         contentTextView.textColor = UIColor.black
-        if isFromAddButton == false {
+        
+        if !isFromAddButton {
             delegate.nD.noteSubject = subjectTextView.text.replacingOccurrences(of: "Subject: ", with: "")
         }
         delegate.nD.noteContent = contentTextView.text
-        subjectTextView.text = delegate.nD.noteSubject
+        
+        
         
         if !isFromAddButton {
             let selectedArrayIndex = delegate.arrayOfNotes[indexNumber]
-            if selectedArrayIndex.noteSubject == "" {
-                subjectTextView.text = "Click the 'Edit' Button To Start Typing"
+            
+            if _isFirstTimeViewing {
+                // Subject
+                if selectedArrayIndex.noteSubject == "" {
+                    subjectTextView.textColor = UIColor.lightGray
+                    subjectTextView.text = "Create a Subject for your note!"
+                }
+                else {
+                    subjectTextView.text = "Subject: \(selectedArrayIndex.noteSubject)"
+                }
+                // Content
+                if selectedArrayIndex.noteContent == "" {
+                    contentTextView.textColor = UIColor.lightGray
+                    contentTextView.text = "Click the 'Edit' Button To Start Typing"
+                }
+                else {
+                    contentTextView.text = "\(selectedArrayIndex.noteContent)"
+                }
+                createdDateLabel.text = "Created on: \(selectedArrayIndex.noteCreationDate)"
+                modifiedDateLabel.text = "Modified on: \(selectedArrayIndex.noteModifiedDate)"
             } else {
-                subjectTextView.text = "Subject: \(selectedArrayIndex.noteSubject)"
+                _noteSubjectInput = subjectTextView.text
+                subjectTextView.text = "Subject: \(_noteSubjectInput)"
             }
             
-            if selectedArrayIndex.noteContent == "" {
-                contentTextView.text = "Nothing Here"
-            } else {
-                contentTextView.text = "\(selectedArrayIndex.noteContent)"
-            }
-            
-            createdDateLabel.text = selectedArrayIndex.noteCreationDate
-            modifiedDateLabel.text = selectedArrayIndex.noteModifiedDate
             
         } else if isFromAddButton {
-            if delegate.nD.noteSubject == "" {
-                subjectTextView.text = "Click the 'Edit' Button To Start Typing"
-            } else {
+            if _isFirstTimeViewing {
                 subjectTextView.text = "Subject: \(delegate.nD.noteSubject)"
-            }
-            
-            if delegate.nD.noteContent == "" {
-                contentTextView.text = "Nothing Here Yet"
+                if delegate.nD.noteSubject == "" {
+                    subjectTextView.textColor = UIColor.lightGray
+                    subjectTextView.text = "Create a Subject for your note!"
+                } else {
+                    
+                }
+                contentTextView.textColor = UIColor.lightGray
+                contentTextView.text = "Click the 'Edit' Button To Start Typing"
             } else {
-                contentTextView.text = "\(delegate.nD.noteContent)"
+                _noteSubjectInput = subjectTextView.text
+                subjectTextView.text = "Subject: \(_noteSubjectInput)"
+                createdDateLabel.text = getCurrentDate()
+                modifiedDateLabel.text = getCurrentDate()
             }
-            
-            createdDateLabel.text = getCurrentDate()
-            modifiedDateLabel.text = getCurrentDate()
             
         }
-
         
+        _isFirstTimeViewing = false
     }
     
     func editingMode() {
         subjectTextView.isEditable = true
         contentTextView.isEditable = true
-        if !isFromAddButton {
-            let selectedArrayIndex = delegate.arrayOfNotes[indexNumber]
-            if selectedArrayIndex.noteSubject == "" {
-                subjectTextView.text = ""
-            } else {
-                subjectTextView.text = selectedArrayIndex.noteSubject
-            }
-            
-            if selectedArrayIndex.noteContent == "" {
-                contentTextView.text = ""
-            } else {
-                contentTextView.text = "\(selectedArrayIndex.noteContent)"
-            }
-            
-            createdDateLabel.text = selectedArrayIndex.noteCreationDate
-            modifiedDateLabel.text = selectedArrayIndex.noteModifiedDate
-            
-        } else if isFromAddButton {
-            if delegate.nD.noteSubject == "" {
-                subjectTextView.text = ""
-            } else {
-                subjectTextView.text = delegate.nD.noteSubject
-            }
-            
-            if delegate.nD.noteContent == "" {
-                contentTextView.text = ""
-            } else {
-                contentTextView.text = "\(delegate.nD.noteContent)"
-            }
-            
-            createdDateLabel.text = getCurrentDate()
-            modifiedDateLabel.text = getCurrentDate()
-            
-        }
+        subjectTextView.textColor = UIColor.black
+        contentTextView.textColor = UIColor.black
+        _noteSubjectInput = ""
+        subjectTextView.text = subjectTextView.text.replacingOccurrences(of: "Subject: ",
+                                                                         with: "")
+        contentTextView.text = contentTextView.text.replacingOccurrences(
+            of: "Click the 'Edit' Button To Start Typing",
+            with: "")
+        
+//
     }
     
     func addDataToArray() {
@@ -144,24 +149,25 @@ class NoteDetailViewController: UIViewController {
             delegate.arrayOfNotes.append(noteItem)
         }
         
-
+        
     }
     
- 
+    
     
     func getCurrentDate() -> String {
-            let currentDate = Date()
-            let formatter = DateFormatter()
-            formatter.timeStyle = .none
-            formatter.dateStyle = .short
-            return formatter.string(from: currentDate)
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .short
+        return formatter.string(from: currentDate)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _isFirstTimeViewing = true
         viewingMode()
-        
+        _isFirstTimeViewing = false
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.tabBarController?.tabBar.isHidden = true
         
@@ -173,8 +179,11 @@ class NoteDetailViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         if self.isEditing {
             editingMode()
+            _isInEditingMode = true
         } else {
             viewingMode()
+            _isInEditingMode = false
+            _isFromEditingModeToViewingMode = true
         }
     }
     

@@ -106,7 +106,7 @@ class NotesTableViewController: UITableViewController {
         var content = cell.defaultContentConfiguration()
         let selectedIndexOfArray = delegate.arrayOfNotes[indexPath.row]
         content.text = selectedIndexOfArray.noteSubject
-        content.secondaryText = selectedIndexOfArray.noteCreationDate
+        content.secondaryText = "Created on: \(selectedIndexOfArray.noteCreationDate)"
         
         cell.contentConfiguration = content
         

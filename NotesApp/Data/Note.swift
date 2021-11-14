@@ -33,14 +33,6 @@ public class Note {
     //    }
     
     
-    
-    public struct noteContents {
-        var noteSubject: String
-        var noteContent: String
-        var noteCreationDate: String
-        var noteModifiedDate: String
-    }
-    
+
+
 }
-
-
