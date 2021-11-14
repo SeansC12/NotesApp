@@ -15,7 +15,12 @@ class NotesTableViewController: UITableViewController {
     //    private var _noteContent: String = ""
     //    private var _noteCreationDate: String = ""
     //    private var _noteModifiedDate: String = ""
+    private var _selectedIndexPath: Int = 0
+    private var _inputSubjectFromTextField: String = ""
+    private var _isFromAddButton: Bool = true
     
+    @IBAction func backToNoteTableView1( _ seg: UIStoryboardSegue) {
+    }
     
     let noteConfigurationAlert = UIAlertController(title: "New Note",
                                                    message: "Give your new note a subject",
@@ -36,11 +41,11 @@ class NotesTableViewController: UITableViewController {
                                                        handler: {
             (_) in
             if let alertTextInput = self.noteConfigurationAlert.textFields!.first!.text {
-                self.delegate.nD.noteSubject = alertTextInput
+                self._inputSubjectFromTextField = alertTextInput
+                self._isFromAddButton = true
                 self.performSegue(withIdentifier: "showNewNote", sender: self)
-                print(self.delegate.nD.noteSubject)
+                self.noteConfigurationAlert.textFields!.first!.text = ""
             }
-            
         }))
         
         newNoteAlert.addAction(UIAlertAction(title: "New Note",
@@ -55,17 +60,29 @@ class NotesTableViewController: UITableViewController {
     
     @IBAction func addNotePressed(_ sender: Any) {
         self.present(newNoteAlert, animated: true, completion: nil)
+        self.tableView.reloadData()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _isFromAddButton = true
         configureAlertActions()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        delegate.nD.noteSubject = ""
+        delegate.nD.noteContent = ""
+        delegate.nD.noteCreationDate = ""
+        delegate.nD.noteModifiedDate = ""
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -78,7 +95,7 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return delegate.nD.notes.count
+        return delegate.arrayOfNotes.count
     }
     
     
@@ -86,6 +103,12 @@ class NotesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath)
         
         // Configure the cell...
+        var content = cell.defaultContentConfiguration()
+        let selectedIndexOfArray = delegate.arrayOfNotes[indexPath.row]
+        content.text = selectedIndexOfArray.noteSubject
+        content.secondaryText = selectedIndexOfArray.noteCreationDate
+        
+        cell.contentConfiguration = content
         
         return cell
     }
@@ -103,17 +126,25 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            delegate.arrayOfNotes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        _selectedIndexPath = indexPath.row
+        print(_selectedIndexPath)
+        _isFromAddButton = false
+        self.performSegue(withIdentifier: "showNewNote", sender: self)
+    }
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        
+        let note = delegate.arrayOfNotes.remove(at: fromIndexPath.row)
+        delegate.arrayOfNotes.insert(note, at: to.row)
+        tableView.reloadData()
     }
     
     /*
@@ -130,10 +161,10 @@ class NotesTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNewNote" {
-            segue.destination as! NoteDetailViewController
-            
+            let destinationViewController = segue.destination as! NoteDetailViewController
+            destinationViewController.indexNumber = _selectedIndexPath
+            destinationViewController.isFromAddButton = _isFromAddButton
+            destinationViewController.delegate.nD.noteSubject = self._inputSubjectFromTextField
         }
     }
-    
-    
 }

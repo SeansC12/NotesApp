@@ -34,7 +34,7 @@
         <scene sceneID="zYm-UN-zNx">
             <objects>
                 <navigationController id="Rbj-pX-4oU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ocT-7y-c5u"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="note.text" catalog="system" id="ocT-7y-c5u"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aH6-8W-Jvg">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -122,24 +122,48 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XYo-eI-cjy">
-                                <rect key="frame" x="20" y="252" width="374" height="587"/>
+                                <rect key="frame" x="20" y="209" width="374" height="604"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwM-XX-IPD">
+                                <rect key="frame" x="20" y="821" width="189" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qws-vX-fE6">
+                                <rect key="frame" x="210" y="821" width="184" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rld-EC-2dw"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Note" id="15k-St-WVs"/>
+                    <navigationItem key="navigationItem" title="New Note" id="15k-St-WVs">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="4gu-Nc-BoM">
+                            <connections>
+                                <action selector="newNoteBackButton:" destination="DIz-WU-yRA" id="mKX-nH-6pp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="XYo-eI-cjy" id="6et-1y-MrT"/>
+                        <outlet property="createdDateLabel" destination="xwM-XX-IPD" id="5Gp-97-BGd"/>
+                        <outlet property="modifiedDateLabel" destination="qws-vX-fE6" id="6fu-MD-cJb"/>
                         <outlet property="subjectTextView" destination="Brr-tc-VbY" id="XCN-vp-rUy"/>
+                        <segue destination="OTd-ze-T7s" kind="unwind" identifier="GoBack" unwindAction="backToNoteTableView1:" id="hMw-9z-Idp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJM-hE-nhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="OTd-ze-T7s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-746.37681159420299" y="1591.7410714285713"/>
         </scene>
@@ -203,7 +227,7 @@
         <scene sceneID="LuV-1s-dN1">
             <objects>
                 <navigationController id="H3I-dW-Uu6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="1HW-jf-vHL"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="1HW-jf-vHL"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qnk-hX-eLK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -220,6 +244,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="note.text" catalog="system" width="128" height="106"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,6 +255,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

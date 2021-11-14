@@ -11,6 +11,9 @@ public class Note {
     var noteContent: String
     var noteCreationDate: String
     var noteModifiedDate: String
+    var notes: [Int: [String]] = [:]
+    
+
     
     init() {
         noteSubject = ""
@@ -29,7 +32,7 @@ public class Note {
     //        }
     //    }
     
-    var notes: [Note] = []
+    
     
     public struct noteContents {
         var noteSubject: String

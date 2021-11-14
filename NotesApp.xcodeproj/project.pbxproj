@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14096057273DFE9B0072060E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14096056273DFE9B0072060E /* Extensions.swift */; };
 		14153C66273A05D00036F14F /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153C65273A05D00036F14F /* NoteDetailViewController.swift */; };
 		14168B7C273409BC009E5BD6 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */; };
 		14168B7E27340A0E009E5BD6 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168B7D27340A0E009E5BD6 /* Note.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14096056273DFE9B0072060E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		14153C65273A05D00036F14F /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		14168B7D27340A0E009E5BD6 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				14168B7D27340A0E009E5BD6 /* Note.swift */,
+				14096056273DFE9B0072060E /* Extensions.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				147DBA6B272EA6F400E6DEEF /* AppDelegate.swift in Sources */,
+				14096057273DFE9B0072060E /* Extensions.swift in Sources */,
 				14168B7E27340A0E009E5BD6 /* Note.swift in Sources */,
 				14153C66273A05D00036F14F /* NoteDetailViewController.swift in Sources */,
 				14168B7C273409BC009E5BD6 /* NotesTableViewController.swift in Sources */,

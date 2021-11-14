@@ -10,11 +10,11 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let nD: Note = Note()
-    
+    var arrayOfNotes: [Note] = []
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let n: Note = Note()
+//        let n: Note = Note()
         
 //        do {
 //            n.subject
