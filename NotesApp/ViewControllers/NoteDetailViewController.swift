@@ -11,7 +11,6 @@ import Foundation
 class NoteDetailViewController: UIViewController {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    private var _subjectThingy: Int = 0
     var indexNumber: Int = 0
     var isFromAddButton: Bool = true
     
@@ -29,7 +28,7 @@ class NoteDetailViewController: UIViewController {
                                                  style: .destructive,
                                                  handler: {
             (_) in
-            self.addDataToDictionary()
+            self.addDataToArray()
             self.performSegue(withIdentifier: "GoBack", sender: self)
         }))
         leaveButtonAlert.addAction(UIAlertAction(title: "Cancel",
@@ -47,26 +46,90 @@ class NoteDetailViewController: UIViewController {
         contentTextView.isEditable = false
         subjectTextView.textColor = UIColor.black
         contentTextView.textColor = UIColor.black
-        if _subjectThingy >= 1 {
+        if isFromAddButton == false {
             delegate.nD.noteSubject = subjectTextView.text.replacingOccurrences(of: "Subject: ", with: "")
         }
         delegate.nD.noteContent = contentTextView.text
+        subjectTextView.text = delegate.nD.noteSubject
         
-        if subjectTextView.text == "" && delegate.nD.noteSubject == "" {
-            subjectTextView.text = "Subject: Nothing Here"
-        } else {
-            subjectTextView.text = "Subject: \(delegate.nD.noteSubject)"
+        if !isFromAddButton {
+            let selectedArrayIndex = delegate.arrayOfNotes[indexNumber]
+            if selectedArrayIndex.noteSubject == "" {
+                subjectTextView.text = "Click the 'Edit' Button To Start Typing"
+            } else {
+                subjectTextView.text = "Subject: \(selectedArrayIndex.noteSubject)"
+            }
+            
+            if selectedArrayIndex.noteContent == "" {
+                contentTextView.text = "Nothing Here"
+            } else {
+                contentTextView.text = "\(selectedArrayIndex.noteContent)"
+            }
+            
+            createdDateLabel.text = selectedArrayIndex.noteCreationDate
+            modifiedDateLabel.text = selectedArrayIndex.noteModifiedDate
+            
+        } else if isFromAddButton {
+            if delegate.nD.noteSubject == "" {
+                subjectTextView.text = "Click the 'Edit' Button To Start Typing"
+            } else {
+                subjectTextView.text = "Subject: \(delegate.nD.noteSubject)"
+            }
+            
+            if delegate.nD.noteContent == "" {
+                contentTextView.text = "Nothing Here Yet"
+            } else {
+                contentTextView.text = "\(delegate.nD.noteContent)"
+            }
+            
+            createdDateLabel.text = getCurrentDate()
+            modifiedDateLabel.text = getCurrentDate()
+            
         }
-       
-        if contentTextView.text == "" && delegate.nD.noteContent == "" {
-            contentTextView.text = "Nothing Here"
-        } else {
-            contentTextView.text = "\(delegate.nD.noteContent)"
-        }
+
         
     }
     
-    func addDataToDictionary() {
+    func editingMode() {
+        subjectTextView.isEditable = true
+        contentTextView.isEditable = true
+        if !isFromAddButton {
+            let selectedArrayIndex = delegate.arrayOfNotes[indexNumber]
+            if selectedArrayIndex.noteSubject == "" {
+                subjectTextView.text = ""
+            } else {
+                subjectTextView.text = selectedArrayIndex.noteSubject
+            }
+            
+            if selectedArrayIndex.noteContent == "" {
+                contentTextView.text = ""
+            } else {
+                contentTextView.text = "\(selectedArrayIndex.noteContent)"
+            }
+            
+            createdDateLabel.text = selectedArrayIndex.noteCreationDate
+            modifiedDateLabel.text = selectedArrayIndex.noteModifiedDate
+            
+        } else if isFromAddButton {
+            if delegate.nD.noteSubject == "" {
+                subjectTextView.text = ""
+            } else {
+                subjectTextView.text = delegate.nD.noteSubject
+            }
+            
+            if delegate.nD.noteContent == "" {
+                contentTextView.text = ""
+            } else {
+                contentTextView.text = "\(delegate.nD.noteContent)"
+            }
+            
+            createdDateLabel.text = getCurrentDate()
+            modifiedDateLabel.text = getCurrentDate()
+            
+        }
+    }
+    
+    func addDataToArray() {
         if !isFromAddButton {
             let noteTypeFromArray = delegate.arrayOfNotes[indexNumber]
             noteTypeFromArray.noteSubject = subjectTextView.text.replacingOccurrences(of: "Subject: ", with: "")
@@ -84,13 +147,7 @@ class NoteDetailViewController: UIViewController {
 
     }
     
-    func editingMode() {
-        _subjectThingy += 1
-        subjectTextView.isEditable = true
-        contentTextView.isEditable = true
-        contentTextView.text = "\(delegate.nD.noteContent)"
-        subjectTextView.text = "\(delegate.nD.noteSubject)"
-    }
+ 
     
     func getCurrentDate() -> String {
             let currentDate = Date()
@@ -103,23 +160,7 @@ class NoteDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _subjectThingy = 0
         viewingMode()
-        
-        if !isFromAddButton {
-            let selectedIndexOfArray = delegate.arrayOfNotes[indexNumber]
-            subjectTextView.text = selectedIndexOfArray.noteSubject
-            contentTextView.text = selectedIndexOfArray.noteContent
-            createdDateLabel.text = selectedIndexOfArray.noteCreationDate
-            modifiedDateLabel.text = selectedIndexOfArray.noteModifiedDate
-            
-        } else {
-            subjectTextView.text = "Subject: \(delegate.nD.noteSubject)"
-            contentTextView.text = delegate.nD.noteContent
-            createdDateLabel.text = delegate.nD.noteCreationDate
-            modifiedDateLabel.text = delegate.nD.noteModifiedDate
-        }
-        
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.tabBarController?.tabBar.isHidden = true
