@@ -8,4 +8,10 @@ public func sample() {
 }
 ```
 
+```python
+
+print("Hello world")
+
+```
+
 ## 
