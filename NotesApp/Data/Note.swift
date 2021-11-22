@@ -11,7 +11,6 @@ public class Note {
     var noteContent: String
     var noteCreationDate: String
     var noteModifiedDate: String
-    var notes: [Int: [String]] = [:]
     
 
     

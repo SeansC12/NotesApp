@@ -11,11 +11,17 @@
 		14153C66273A05D00036F14F /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14153C65273A05D00036F14F /* NoteDetailViewController.swift */; };
 		14168B7C273409BC009E5BD6 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */; };
 		14168B7E27340A0E009E5BD6 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14168B7D27340A0E009E5BD6 /* Note.swift */; };
+		1447342F27433D56008B9D57 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1447342E27433D56008B9D57 /* TaskTableViewController.swift */; };
+		1447343127433DC3008B9D57 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1447343027433DC3008B9D57 /* Task.swift */; };
+		144734342743495F008B9D57 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144734322743495F008B9D57 /* TaskTableViewCell.swift */; };
+		144734352743495F008B9D57 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 144734332743495F008B9D57 /* TaskTableViewCell.xib */; };
 		147DBA6B272EA6F400E6DEEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DBA6A272EA6F400E6DEEF /* AppDelegate.swift */; };
 		147DBA6D272EA6F400E6DEEF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DBA6C272EA6F400E6DEEF /* SceneDelegate.swift */; };
 		147DBA72272EA6F400E6DEEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147DBA70272EA6F400E6DEEF /* Main.storyboard */; };
 		147DBA74272EA6F500E6DEEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147DBA73272EA6F500E6DEEF /* Assets.xcassets */; };
 		147DBA77272EA6F500E6DEEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147DBA75272EA6F500E6DEEF /* LaunchScreen.storyboard */; };
+		14BF79BE27423E23007E5376 /* NotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF79BD27423E23007E5376 /* NotesCollectionViewController.swift */; };
+		14BF79C127424239007E5376 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF79C027424239007E5376 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +29,10 @@
 		14153C65273A05D00036F14F /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		14168B7D27340A0E009E5BD6 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		1447342E27433D56008B9D57 /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
+		1447343027433DC3008B9D57 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		144734322743495F008B9D57 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		144734332743495F008B9D57 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		147DBA67272EA6F400E6DEEF /* NotesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		147DBA6A272EA6F400E6DEEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		147DBA6C272EA6F400E6DEEF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +40,8 @@
 		147DBA73272EA6F500E6DEEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		147DBA76272EA6F500E6DEEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		147DBA78272EA6F500E6DEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14BF79BD27423E23007E5376 /* NotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCollectionViewController.swift; sourceTree = "<group>"; };
+		14BF79C027424239007E5376 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,19 +55,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14006370273A13D300FBD1C4 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */,
-				14153C65273A05D00036F14F /* NoteDetailViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		14006371273A13F400FBD1C4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				14168B7D27340A0E009E5BD6 /* Note.swift */,
+				1447343027433DC3008B9D57 /* Task.swift */,
 				14096056273DFE9B0072060E /* Extensions.swift */,
 			);
 			path = Data;
@@ -80,16 +84,30 @@
 		147DBA69272EA6F400E6DEEF /* NotesApp */ = {
 			isa = PBXGroup;
 			children = (
-				14006370273A13D300FBD1C4 /* ViewControllers */,
-				14006371273A13F400FBD1C4 /* Data */,
+				14BF79BF274241EC007E5376 /* View_Controllers */,
+				144734332743495F008B9D57 /* TaskTableViewCell.xib */,
+				144734322743495F008B9D57 /* TaskTableViewCell.swift */,
 				147DBA6A272EA6F400E6DEEF /* AppDelegate.swift */,
-				147DBA6C272EA6F400E6DEEF /* SceneDelegate.swift */,
 				147DBA70272EA6F400E6DEEF /* Main.storyboard */,
+				14BF79C027424239007E5376 /* SettingsViewController.swift */,
 				147DBA73272EA6F500E6DEEF /* Assets.xcassets */,
+				147DBA6C272EA6F400E6DEEF /* SceneDelegate.swift */,
 				147DBA75272EA6F500E6DEEF /* LaunchScreen.storyboard */,
 				147DBA78272EA6F500E6DEEF /* Info.plist */,
+				14006371273A13F400FBD1C4 /* Data */,
 			);
 			path = NotesApp;
+			sourceTree = "<group>";
+		};
+		14BF79BF274241EC007E5376 /* View_Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14168B7B273409BC009E5BD6 /* NotesTableViewController.swift */,
+				14BF79BD27423E23007E5376 /* NotesCollectionViewController.swift */,
+				14153C65273A05D00036F14F /* NoteDetailViewController.swift */,
+				1447342E27433D56008B9D57 /* TaskTableViewController.swift */,
+			);
+			path = View_Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144734352743495F008B9D57 /* TaskTableViewCell.xib in Resources */,
 				147DBA77272EA6F500E6DEEF /* LaunchScreen.storyboard in Resources */,
 				147DBA74272EA6F500E6DEEF /* Assets.xcassets in Resources */,
 				147DBA72272EA6F400E6DEEF /* Main.storyboard in Resources */,
@@ -165,10 +184,15 @@
 			files = (
 				147DBA6B272EA6F400E6DEEF /* AppDelegate.swift in Sources */,
 				14096057273DFE9B0072060E /* Extensions.swift in Sources */,
+				144734342743495F008B9D57 /* TaskTableViewCell.swift in Sources */,
+				1447343127433DC3008B9D57 /* Task.swift in Sources */,
 				14168B7E27340A0E009E5BD6 /* Note.swift in Sources */,
 				14153C66273A05D00036F14F /* NoteDetailViewController.swift in Sources */,
+				14BF79BE27423E23007E5376 /* NotesCollectionViewController.swift in Sources */,
 				14168B7C273409BC009E5BD6 /* NotesTableViewController.swift in Sources */,
+				1447342F27433D56008B9D57 /* TaskTableViewController.swift in Sources */,
 				147DBA6D272EA6F400E6DEEF /* SceneDelegate.swift in Sources */,
+				14BF79C127424239007E5376 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

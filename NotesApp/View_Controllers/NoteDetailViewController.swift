@@ -110,8 +110,8 @@ class NoteDetailViewController: UIViewController {
             } else {
                 _noteSubjectInput = subjectTextView.text
                 subjectTextView.text = "Subject: \(_noteSubjectInput)"
-                createdDateLabel.text = getCurrentDate()
-                modifiedDateLabel.text = getCurrentDate()
+                createdDateLabel.text = "Created on: \(getCurrentDate())"
+                modifiedDateLabel.text = "Modified on: \(getCurrentDate())"
             }
             
         }
